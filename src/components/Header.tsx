@@ -3,8 +3,8 @@ import Link from "next/link";
 const Header: React.FC = () => {
   return (
     <nav>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 bg-black">
+      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 bg-black h-16">
+        <div className="flex justify-between items-center h-full">
           <div className="flex-shrink-0">
             <Link href="/">
               <span className="text-2xl">Next App</span>
