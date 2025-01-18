@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Footer: React.FC = () => {
   return (
     <div className="flex justify-between items-start mx-4">
@@ -7,9 +9,15 @@ const Footer: React.FC = () => {
       <div className="flex flex-col items-center gap-3">
         <h2 className="font-semibold text-lg py-3">Links</h2>
         <div>
-          <span></span>
-          <span></span>
-          <span></span>
+          <Link href="/">
+            <span>Home</span>
+          </Link>
+          <Link href="/">
+            <span>About</span>
+          </Link>
+          <Link href="/">
+            <span>Contact</span>
+          </Link>
         </div>
       </div>
       <div>
