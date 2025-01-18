@@ -1,11 +1,11 @@
 const Footer: React.FC = () => {
   return (
-    <div>
-      <div>
-        <p>First Next App</p>
+    <div className="flex justify-between items-start mx-4">
+      <div className="flex flex-col gap-3">
+        <p className="text-lg font-semibold py-3">First Next App</p>
       </div>
-      <div>
-        <h2>Links</h2>
+      <div className="flex flex-col items-center gap-3">
+        <h2 className="font-semibold text-lg py-3">Links</h2>
         <div>
           <span></span>
           <span></span>
@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
       <div>
-        <h3>Contacts</h3>
+        <h3 className="font-semibold text-lg py-3">Contacts</h3>
       </div>
     </div>
   );
