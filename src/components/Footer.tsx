@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Footer: React.FC = () => {
   return (
-    <div className="flex justify-between items-start mx-4">
+    <div className="flex justify-between items-start mx-4 absolute bottom-0 w-full">
       <div className="flex flex-col gap-3">
         <p className="text-lg font-semibold py-3">First Next App</p>
       </div>
