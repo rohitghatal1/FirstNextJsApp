@@ -6,7 +6,7 @@ import Banner from "../../../public/images/Eco-Friendly_Home.jpg";
 import Banner1 from "../../../public/images/homeImage1.jpg";
 import Banner2 from "../../../public/images/homeImage2.jpeg";
 
-const EcoFriendlySlider: React.FC = () => {
+const Slider: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const images = [Banner, Banner1, Banner2];
@@ -34,6 +34,7 @@ const EcoFriendlySlider: React.FC = () => {
           <h3 className="text-green-600 uppercase font-semibold tracking-wide">
             Why Compromise?
           </h3>
+
           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 leading-tight">
             Build Sustainable. <br />
             Live Eco-Friendly.
@@ -43,9 +44,11 @@ const EcoFriendlySlider: React.FC = () => {
             Join us in creating a greener tomorrow, one eco-friendly home at a
             time.
           </p>
+
           <p className="text-green-600 font-semibold text-sm">
             AVAILABLE IN YOUR CITY
           </p>
+
           <button className="bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-green-700 transition duration-300">
             Book Advisor for FREE
           </button>
@@ -66,6 +69,7 @@ const EcoFriendlySlider: React.FC = () => {
           >
             &#8592;
           </button>
+
           <button
             className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-100 text-gray-600 rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-gray-200"
             onClick={nextSlide}
@@ -78,4 +82,4 @@ const EcoFriendlySlider: React.FC = () => {
   );
 };
 
-export default EcoFriendlySlider;
+export default Slider;
