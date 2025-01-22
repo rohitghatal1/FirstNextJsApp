@@ -15,7 +15,7 @@ const Footer = () => {
     <footer className="bg-gray-800 px-4 py-10 text-white">
       <div className="w-[90%] mx-auto flex flex-col md:flex-row items-start justify-between space-y-8 md:space-y-0">
         <div className="space-y-6">
-          <h2 className="text-4xl font-extrabold tracking-widest">BEEN</h2>
+          <h2 className="text-4xl font-extrabold tracking-widest">Next App</h2>
           <div className="space-y-4 text-gray-200">
             <p className="flex items-center gap-2">
               <span className="font-medium flex items-center gap-1">
@@ -33,8 +33,9 @@ const Footer = () => {
               <span className="font-medium flex items-center gap-1">
                 <SiGmail color="red" /> Email:
               </span>
+
               <span className="text-lg font-semibold">
-                support@been.gmail.com
+                support@nextapp.gmail.com
               </span>
             </p>
 
@@ -42,6 +43,7 @@ const Footer = () => {
               <h3 className="font-semibold py-2 text-lg text-white">
                 Follow us on
               </h3>
+
               <div className="flex items-center gap-4 mt-3">
                 <a
                   href="#"
@@ -49,12 +51,14 @@ const Footer = () => {
                 >
                   <FaFacebook size={20} />
                 </a>
+
                 <a
                   href="#"
                   className="text-red-600 h-10 w-10 flex items-center justify-center rounded-full bg-red-100 hover:bg-red-200 hover:-translate-y-1 transition-all duration-300 shadow-md"
                 >
                   <FaInstagram size={20} />
                 </a>
+
                 <a
                   href="#"
                   className="text-blue-800 h-10 w-10 flex items-center justify-center rounded-full bg-blue-100 hover:bg-blue-200 hover:-translate-y-1 transition-all duration-300 shadow-md"
@@ -123,7 +127,7 @@ const Footer = () => {
               href="/property"
               className="hover:text-gray-200 transition duration-300"
             >
-              MSME's
+              MSMEs
             </Link>
             <Link
               href="/blog"
