@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { FaExternalLinkAlt } from "react-icons/fa";
-import aaryaPradhanImg from "../../../public/images/Aarya-Pradhan.jpg";
-import AadarshChauhanImg from "../../../public/images/Aadarsh-Chauhan.jpg";
-import AashishBadeImg from "../../../public/images/Aashish-Bade.jpg";
-import AbhishekImg from "../../../public/images/Abhishek-Karn_Design-MSME.jpg";
+import aaryaPradhanImg from "../../../public/assets/images/ecoFriendlyhome.webp";
+import AadarshChauhanImg from "../../../public/assets/images/ecoFriendlyhome.webp";
+import AashishBadeImg from "../../../public/assets/images/ecoFriendlyhome.webp";
+import AbhishekImg from "../../../public/assets/images/ecoFriendlyhome.webp";
 import Link from "next/link";
 
 const DesignMSME: React.FC = () => {
@@ -67,6 +67,7 @@ const DesignMSME: React.FC = () => {
                     <span className="text-gray-500">Name:</span>{" "}
                     {designMsme?.name}
                   </p>
+
                   <p className="font-semibold text-sm mb-2">
                     <span className="text-gray-500">Organization:</span>{" "}
                     {designMsme?.organization}
