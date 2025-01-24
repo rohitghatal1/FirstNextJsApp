@@ -1,10 +1,9 @@
 "use client";
 import Search from "antd/es/transfer/search";
 import ImagePlaceHolder from "../../../public/images/Placeholder-Image.jpg";
-
-import moment from "moment";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Messages: React.FC = () => {
   const [selectedChat, setSelectedChat] = useState<any>([]);
@@ -75,10 +74,6 @@ const Messages: React.FC = () => {
   //     ],
   //   },
   // ];
-
-  const handleChatSelect = (chat: any) => {
-    setSelectedChat(chat);
-  };
 
   return (
     <div className="h-screen pt-16 w-full bg-gradient-to-r from-blue-50 to-white flex">
