@@ -13,7 +13,7 @@ const Messages: React.FC = () => {
 
   const getConfigData = async () => {
     try {
-      const response = await axiosInstance.get("/users/getConfig");
+      const response = await axios.get("/users/getConfig");
       setLoggedInUser(response?.data?.userData);
       console.log("user data:", response?.data?.userData);
     } catch (err: any) {
@@ -28,9 +28,7 @@ const Messages: React.FC = () => {
     console.log("logged in user:", loggedInUser);
     console.log("user id", loggedInUser?._id);
     try {
-      const response = await axiosInstance.get(
-        `/chats/user/${loggedInUser?._id}`
-      );
+      const response = await axios.get(`/chats/user/${loggedInUser?._id}`);
       setAllChats(response?.data?.chats);
       console.log(response?.data?.chats);
     } catch (err: any) {
@@ -44,7 +42,7 @@ const Messages: React.FC = () => {
 
   const getChatMessages = async (chatId: string) => {
     try {
-      const response = await axiosInstance.get(`chats/${chatId}/messages`);
+      const response = await axios.get(`chats/${chatId}/messages`);
       setSelectedChat(response?.data?.messages);
     } catch (err: any) {
       console.log("Error fetching chats: ", err);
