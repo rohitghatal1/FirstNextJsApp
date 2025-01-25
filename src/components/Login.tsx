@@ -2,6 +2,7 @@ import { Button, Form, Input } from "antd";
 import { useState } from "react";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { FaRegUser } from "react-icons/fa6";
+import OTPBox from "./OTPBox";
 
 const Login: React.FC = () => {
   const [loginForm] = Form.useForm();
