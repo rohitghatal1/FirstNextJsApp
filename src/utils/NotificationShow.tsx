@@ -18,6 +18,7 @@ export const showErrorMessage = (message: string) => {
     localStorage.removeItem("accessToken");
     return;
   }
+
   Modal.confirm({
     zIndex: 100,
     maskClosable: true,
