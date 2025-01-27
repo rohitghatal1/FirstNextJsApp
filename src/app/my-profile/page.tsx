@@ -7,6 +7,7 @@ import { FaUserEdit } from "react-icons/fa";
 import { Button, Drawer, Form, Input } from "antd";
 import Link from "next/link";
 import axios from "axios";
+import Posts from "@/components/Posts";
 
 const ProfilePage: React.FC = () => {
   const [userData, setUserData] = useState<any>();
@@ -163,9 +164,6 @@ const ProfilePage: React.FC = () => {
                 </p>
               </div>
             </div>
-          )}
-          {activeTab === "myProfessionals" && (
-            <MyProfessionals userId={userData?._id} />
           )}
           {activeTab === "posts" && <Posts />}
         </div>
