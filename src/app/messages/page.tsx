@@ -3,10 +3,10 @@ import Search from "antd/es/transfer/search";
 import ImagePlaceHolder from "../../../../public/images/Placeholder-Image.jpg";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import axiosInstance from "../../utils/axiosInstance";
 import { useParams } from "next/navigation";
 import { Form, Input } from "antd";
-import { showErrorMessage } from "@/app/utils/notificationShow";
+import axios from "axios";
+import { showErrorMessage } from "@/utils/NotificationShow";
 
 const Messages: React.FC = () => {
   const [sendMessageForm] = Form.useForm();
@@ -21,7 +21,7 @@ const Messages: React.FC = () => {
 
   const getAllChats = async () => {
     try {
-      const response = await axiosInstance.get("/chatrooms/getMyChatrooms");
+      const response = await axios.get("/chatrooms/getMyChatrooms");
       setAllChats(response?.data?.chatRooms);
       console.log("all chatroms", response?.data?.chatRooms);
     } catch (err: any) {
@@ -35,7 +35,7 @@ const Messages: React.FC = () => {
 
   const getChatMessages = async (chatId: string) => {
     try {
-      const response = await axiosInstance.get(`/chatrooms/${chatId}/messages`);
+      const response = await axios.get(`/chatrooms/${chatId}/messages`);
       setSelectedChat(response?.data?.messages);
     } catch (err: any) {
       console.log("Error fetching chats: ", err);
@@ -48,7 +48,7 @@ const Messages: React.FC = () => {
       chatroom_id: chatroomId,
     };
     try {
-      await axiosInstance.post("/chatrooms/message", updatedValues);
+      await axios.post("/chatrooms/message", updatedValues);
       sendMessageForm.resetFields();
     } catch (err: any) {
       showErrorMessage(err?.response?.data?.message);
