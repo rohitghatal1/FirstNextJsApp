@@ -1,35 +1,29 @@
 "use client";
 import Search from "antd/es/transfer/search";
-import ImagePlaceHolder from "../../../public/images/Placeholder-Image.jpg";
+import ImagePlaceHolder from "../../../../public/images/Placeholder-Image.jpg";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../utils/axiosInstance";
+import { useParams } from "next/navigation";
+import { Form, Input } from "antd";
+import { showErrorMessage } from "@/app/utils/notificationShow";
 
 const Messages: React.FC = () => {
-  const [selectedChat, setSelectedChat] = useState<any>([]);
-  const [loggedInUser, setLoggedInUser] = useState<any>();
+  const [sendMessageForm] = Form.useForm();
+  const params = useParams();
+  const id = params?.id;
+  const [selectedChat, setSelectedChat] = useState<any>(null);
   const [allChats, setAllChats] = useState<any>([]);
+  const [selectedPerson, setSelectedPerson] = useState<any>();
+  const [chatroomId, setChatRoomId] = useState<any>("");
 
-  const getConfigData = async () => {
-    try {
-      const response = await axios.get("/users/getConfig");
-      setLoggedInUser(response?.data?.userData);
-      console.log("user data:", response?.data?.userData);
-    } catch (err: any) {
-      console.log("error:", err);
-    }
-  };
-  useEffect(() => {
-    getConfigData();
-  }, []);
+  console.log("fetched id in message page: ", id);
 
   const getAllChats = async () => {
-    console.log("logged in user:", loggedInUser);
-    console.log("user id", loggedInUser?._id);
     try {
-      const response = await axios.get(`/chats/user/${loggedInUser?._id}`);
-      setAllChats(response?.data?.chats);
-      console.log(response?.data?.chats);
+      const response = await axiosInstance.get("/chatrooms/getMyChatrooms");
+      setAllChats(response?.data?.chatRooms);
+      console.log("all chatroms", response?.data?.chatRooms);
     } catch (err: any) {
       console.log("Error fetching all chats: ", err);
     }
@@ -37,44 +31,29 @@ const Messages: React.FC = () => {
 
   useEffect(() => {
     getAllChats();
-  }, [loggedInUser?._id]);
+  }, []);
 
   const getChatMessages = async (chatId: string) => {
     try {
-      const response = await axios.get(`chats/${chatId}/messages`);
+      const response = await axiosInstance.get(`/chatrooms/${chatId}/messages`);
       setSelectedChat(response?.data?.messages);
     } catch (err: any) {
       console.log("Error fetching chats: ", err);
     }
   };
-  //   {
-  //     id: 1,
-  //     img: Photo,
-  //     name: "Aadarsh Chauhan",
-  //     timeStamp: moment().subtract(1, "days").format("MMM D, h:mm A"),
-  //     lastMessage: "Hey, how are you?",
-  //     messages: [
-  //       { text: "Hey, how are you?", sender: false, time: "2:30 PM" },
-  //       {
-  //         text: "I'm good, thanks! How about you?",
-  //         sender: true,
-  //         time: "2:31 PM",
-  //       },
-  //       { text: "Doing well!", sender: false, time: "2:32 PM" },
-  //     ],
-  //   },
-  //   {
-  //     id: 2,
-  //     img: Photo,
-  //     name: "Arya Pradhan",
-  //     timeStamp: moment().format("MMM D, h:mm A"),
-  //     lastMessage: "Let's catch up later!",
-  //     messages: [
-  //       { text: "Let's catch up later!", sender: false, time: "3:00 PM" },
-  //     ],
-  //   },
-  // ];
 
+  const sendChatMessage = async (value: any) => {
+    const updatedValues = {
+      ...value,
+      chatroom_id: chatroomId,
+    };
+    try {
+      await axiosInstance.post("/chatrooms/message", updatedValues);
+      sendMessageForm.resetFields();
+    } catch (err: any) {
+      showErrorMessage(err?.response?.data?.message);
+    }
+  };
   return (
     <div className="h-screen pt-16 w-full bg-gradient-to-r from-blue-50 to-white flex">
       <div className="h-full w-96 pt-3 border-r border-gray-300 bg-white shadow-md">
@@ -88,7 +67,11 @@ const Messages: React.FC = () => {
               <div
                 key={chat._id}
                 className="flex items-center gap-4 p-3 hover:bg-gray-100 transition cursor-pointer border-b border-gray-200"
-                onClick={() => getChatMessages(chat?._id)}
+                onClick={() => {
+                  getChatMessages(chat?._id);
+                  setChatRoomId(chat?._id);
+                  setSelectedPerson(chat?.professional_id);
+                }}
               >
                 <Image
                   src={chat?.img || ImagePlaceHolder}
@@ -99,7 +82,7 @@ const Messages: React.FC = () => {
                 <div className="flex-1">
                   <div className="flex justify-between items-center">
                     <h3 className="font-semibold text-sm text-gray-800">
-                      {chat?.professional?.name}
+                      {chat?.professional_id?.name}
                     </h3>
                     {/* <span className="text-xs text-gray-500">
                     {chat.timeStamp}
@@ -122,33 +105,41 @@ const Messages: React.FC = () => {
       <div className="flex-1 bg-gray-50">
         {selectedChat ? (
           <div className="h-full flex flex-col">
-            <div className="flex items-center gap-4 p-4 bg-white shadow">
+            <div className="flex items-center gap-4 p-4 bg-white shadow relative">
               <Image
-                src={selectedChat.img}
+                src={selectedPerson?.img || ImagePlaceHolder}
                 alt="chatAvatar"
                 className="rounded-full h-10 w-10"
               />
-              <h3 className="font-semibold text-lg">{selectedChat.name}</h3>
+              <h3 className="font-semibold text-lg">{selectedPerson?.name}</h3>
+              <span
+                onClick={() => setSelectedChat(null)}
+                className="text-2xl font-semibold text-red-600 absolute top-4 right-4 cursor-pointer"
+              >
+                &times;
+              </span>
             </div>
 
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
-              {selectedChat?.messages?.map((message: any, index: number) => (
+              {selectedChat?.map((message: any, index: number) => (
                 <div
                   key={index}
                   className={`flex ${
-                    message.sender ? "justify-end" : "justify-start"
+                    message.sender_type === "user"
+                      ? "justify-end"
+                      : "justify-start"
                   }`}
                 >
                   <div
                     className={`${
-                      message.sender
+                      message.sender_type === "user"
                         ? "bg-green-100 text-green-800"
                         : "bg-gray-200 text-gray-800"
                     } max-w-xs px-4 py-2 rounded-lg shadow`}
                   >
                     <p className="text-sm">{message.text}</p>
                     <p className="text-xs text-gray-500 text-right">
-                      {message.time}
+                      {/* {message.time} */}
                     </p>
                   </div>
                 </div>
@@ -156,15 +147,28 @@ const Messages: React.FC = () => {
             </div>
 
             {/* Message Input */}
-            <div className="p-4 bg-white shadow flex items-center gap-4">
-              <input
-                type="text"
-                placeholder="Type a message"
-                className="flex-1 border rounded-lg px-4 py-2 focus:outline-none"
-              />
-              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
-                Send
-              </button>
+            <div className="p-4 bg-white shadow">
+              <Form
+                layout="vertical"
+                form={sendMessageForm}
+                onFinish={sendChatMessage}
+              >
+                <div className="flex items-start gap-2 w-full">
+                  <Form.Item name="text" className="w-[92%]">
+                    <Input
+                      type="text"
+                      placeholder="Type a message"
+                      className="flex-1 border rounded-lg px-4 py-2 focus:outline-none"
+                    />
+                  </Form.Item>
+                  <button
+                    className="bg-blue-500 text-white px-4 py-2 rounded-lg w-[8%]"
+                    onClick={() => sendMessageForm.submit()}
+                  >
+                    Send
+                  </button>
+                </div>
+              </Form>
             </div>
           </div>
         ) : (
