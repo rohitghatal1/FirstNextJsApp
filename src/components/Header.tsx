@@ -3,6 +3,25 @@
 import Link from "next/link";
 
 const Header: React.FC<{ openLoginForm: () => void }> = ({ openLoginForm }) => {
+  const msmeCategoryList = [
+    { label: "Design MESE's", link: "/design-msme" },
+    { label: "Builder MSME's", link: "/builder-msme" },
+    { label: "Construction MSME's", link: "/construction-msme" },
+  ];
+  const msmeCategory = (
+    <div className="flex flex-col gap-2">
+      {msmeCategoryList.map((msme: any, index: number) => (
+        <Link
+          href={msme.link}
+          key={index}
+          className="cursor-pointer hover:text-green-600"
+        >
+          {msme.label}
+        </Link>
+      ))}
+    </div>
+  );
+
   return (
     <nav className="bg-gradient-to-r from-green-600 via-green-500 to-green-700 backdrop-blur-lg border border-white/20 fixed top-0 w-full flex items-center justify-between px-8 py-4 z-50 shadow-lg">
       <div className="flex items-center gap-8">
