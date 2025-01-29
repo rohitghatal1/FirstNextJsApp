@@ -8,6 +8,7 @@ const Header: React.FC<{ openLoginForm: () => void }> = ({ openLoginForm }) => {
     { label: "Builder MSME's", link: "/builder-msme" },
     { label: "Construction MSME's", link: "/construction-msme" },
   ];
+
   const msmeCategory = (
     <div className="flex flex-col gap-2">
       {msmeCategoryList.map((msme: any, index: number) => (
@@ -21,6 +22,24 @@ const Header: React.FC<{ openLoginForm: () => void }> = ({ openLoginForm }) => {
       ))}
     </div>
   );
+
+  const forProfessionalsCategoryList = [
+    { label: "Membership Program", link: "/membership-program" },
+  ];
+
+  const forProfessionalsCategory = [
+    <div className="flex flex-col gap-2">
+      {forProfessionalsCategoryList.map((category: any, index: number) => (
+        <Link
+          href={category.link}
+          key={index}
+          className="cursor-pointer hover:text-green-600"
+        >
+          {category.label}
+        </Link>
+      ))}
+    </div>,
+  ];
 
   return (
     <nav className="bg-gradient-to-r from-green-600 via-green-500 to-green-700 backdrop-blur-lg border border-white/20 fixed top-0 w-full flex items-center justify-between px-8 py-4 z-50 shadow-lg">
