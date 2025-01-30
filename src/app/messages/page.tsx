@@ -3,11 +3,11 @@ import Search from "antd/es/transfer/search";
 import ImagePlaceHolder from "../../../../public/images/Placeholder-Image.jpg";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import axiosInstance from "../../utils/axiosInstance";
 import { useParams, useRouter } from "next/navigation";
 import { Form, Input } from "antd";
-import { showErrorMessage } from "@/app/utils/notificationShow";
 import moment from "moment";
+import axios from "axios";
+import { showErrorMessage } from "@/utils/NotificationShow";
 
 const Messages: React.FC = () => {
   const [sendMessageForm] = Form.useForm();
@@ -24,7 +24,7 @@ const Messages: React.FC = () => {
 
   const getConfigData = async () => {
     try {
-      const response = await axiosInstance.get("/users/getConfig");
+      const response = await axios.get("/users/getConfig");
       setLoggedInUser(response?.data?.userData);
     } catch (err: any) {
       console.log(err);
@@ -38,7 +38,7 @@ const Messages: React.FC = () => {
   const initializeChats = async () => {
     try {
       // Fetch existing chats
-      const chatResponse = await axiosInstance.get("/chatrooms/getMyChatrooms");
+      const chatResponse = await axios.get("/chatrooms/getMyChatrooms");
       const chats = chatResponse.data.chatRooms;
       setAllChats(chats);
 
@@ -52,7 +52,7 @@ const Messages: React.FC = () => {
           handleChatSelect(existingChat);
         } else {
           // Create new chatroom if doesn't exist
-          const newChatResponse = await axiosInstance.post("/chatrooms/start", {
+          const newChatResponse = await axios.post("/chatrooms/start", {
             professional_id: professionalId,
           });
           const newChat = newChatResponse.data.chatRoom;
@@ -83,7 +83,7 @@ const Messages: React.FC = () => {
 
   const getChatMessages = async (chatId: string) => {
     try {
-      const response = await axiosInstance.get(`/chatrooms/${chatId}/messages`);
+      const response = await axios.get(`/chatrooms/${chatId}/messages`);
       setSelectedChat(response.data.messages);
     } catch (err) {
       showErrorMessage("Error loading messages");
@@ -102,7 +102,7 @@ const Messages: React.FC = () => {
 
   const sendChatMessage = async (values: any) => {
     try {
-      await axiosInstance.post("/chatrooms/message", {
+      await axios.post("/chatrooms/message", {
         ...values,
         chatroom_id: chatroomId,
       });
