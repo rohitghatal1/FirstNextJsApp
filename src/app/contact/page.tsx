@@ -28,7 +28,7 @@ const ContactUs: React.FC = () => {
             <div>
               <h3 className="font-semibold py-2 text-gray-800">Address</h3>
               <p className="text-gray-500 flex items-start gap-2">
-                <GrLocation /> Kusunti Height, Lalitpur
+                <GrLocation /> Thasikhel, Lalitpur
               </p>
             </div>
             <div>
@@ -40,12 +40,14 @@ const ContactUs: React.FC = () => {
                 <FaPhoneAlt /> 9806415229
               </p>
             </div>
+
             <div>
               <h3 className="font-semibold py-2 text-gray-800">Email</h3>
               <p className="text-gray-500 flex items-start gap-2">
-                <HiOutlineMail /> support@been.com
+                <HiOutlineMail /> rohitghatal@gmail.com
               </p>
             </div>
+
             <div className="">
               <h3 className="font-semibold py-2 text-lg">Follow us on</h3>
               <div className="flex items-center gap-4">
