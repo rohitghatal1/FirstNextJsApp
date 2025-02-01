@@ -52,19 +52,22 @@ const ContactUs: React.FC = () => {
               <h3 className="font-semibold py-2 text-lg">Follow us on</h3>
               <div className="flex items-center gap-4">
                 <a
-                  href="#"
+                  href="https://www.facebook.com/rohit.rohit.ghatal/"
+                  target="_blank"
                   className="text-blue-600 h-10 w-10 flex items-center justify-center rounded-full bg-blue-100 hover:bg-blue-200 hover:-translate-y-1 transition-all duration-300 shadow-md"
                 >
                   <FaFacebook size={16} />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.instagram.com/_rohit.ghatal_/"
+                  target="_blank"
                   className="text-red-600 h-10 w-10 flex items-center justify-center rounded-full bg-red-100 hover:bg-red-200 hover:-translate-y-1 transition-all duration-300 shadow-md"
                 >
                   <FaInstagram size={16} />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/in/rohit-ghatal-7823111b4/"
+                  target="_blank"
                   className="text-blue-800 h-10 w-10 flex items-center justify-center rounded-full bg-blue-100 hover:bg-blue-200 hover:-translate-y-1 transition-all duration-300 shadow-md"
                 >
                   <FaLinkedinIn size={16} />
