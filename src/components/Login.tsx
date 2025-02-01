@@ -1,8 +1,10 @@
 import { Button, Form, Input } from "antd";
-import { useState } from "react";
+import { use, useState } from "react";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { FaRegUser } from "react-icons/fa6";
 import OTPBox from "./OTPBox";
+import axios from "axios";
+import { showErrorMessage } from "@/utils/NotificationShow";
 
 const Login: React.FC = () => {
   const [loginForm] = Form.useForm();
@@ -10,7 +12,27 @@ const Login: React.FC = () => {
   const [isLoginFormOpen, setIsLoginFormOpen] = useState<boolean>(true);
   const [isVerifyOtpModalOpen, setIsVerifyOtpModalOpen] =
     useState<boolean>(false);
-  const hanldeFormSubmit = async (values: any) => {};
+  const [mobileNumber, setMoibleNumber] = useState<any>("");
+
+  const hanldeFormSubmit = async (values: any) => {
+    const updatedNumber = "+977" + values?.mobile_number;
+    setMoibleNumber(values?.mobile_number);
+    const updatedValues = {
+      ...values,
+      mobile_number: updatedNumber,
+      country_code: "Np",
+    };
+
+    loginForm.validateFields();
+    try {
+      const response = await axios.post("/users/requestOtp", updatedValues);
+      console.log("otp: ", response?.data?.otp);
+      setIsLoginFormOpen(false);
+      setIsVerifyOtpModalOpen(true);
+    } catch (err: any) {
+      showErrorMessage(err?.response?.data?.message);
+    }
+  };
 
   const handleOtpChange = (value: any) => {
     setOTP(value);
