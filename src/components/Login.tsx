@@ -38,7 +38,32 @@ const Login: React.FC = () => {
     setOTP(value);
   };
 
-  const handleVerifyOtp = () => {};
+  const handleVerifyOtp = async () => {
+    try {
+      const response = await axiosInstance.post("/users/verifyOtp", {
+        country_code: "Np",
+        mobile_number: "+977" + mobileNumber,
+        otp: OTP,
+      });
+
+      const accessToken = response?.data?.accessToken;
+      if (accessToken) {
+        localStorage.setItem("accessToken", accessToken);
+      }
+
+      const configResponse = await axiosInstance.get("/users/getConfig");
+      const userType = configResponse?.data?.jwtdata?.user_type;
+
+      if (userType) {
+        router.push("/");
+      } else {
+        router.push("/complete-profile");
+      }
+    } catch (err: any) {
+      showErrorMessage(err?.response?.data?.message);
+    }
+  };
+
   return (
     <div className="flex items-center justify-center">
       {isLoginFormOpen && (
