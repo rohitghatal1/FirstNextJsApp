@@ -1,12 +1,14 @@
 import { Button, Form, Input } from "antd";
-import { use, useState } from "react";
+import { use, useReducer, useState } from "react";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { FaRegUser } from "react-icons/fa6";
 import OTPBox from "./OTPBox";
 import axios from "axios";
 import { showErrorMessage } from "@/utils/NotificationShow";
+import { useRouter } from "next/navigation";
 
 const Login: React.FC = () => {
+  const router = useRouter();
   const [loginForm] = Form.useForm();
   const [OTP, setOTP] = useState<any>();
   const [isLoginFormOpen, setIsLoginFormOpen] = useState<boolean>(true);
@@ -40,7 +42,7 @@ const Login: React.FC = () => {
 
   const handleVerifyOtp = async () => {
     try {
-      const response = await axiosInstance.post("/users/verifyOtp", {
+      const response = await axios.post("/users/verifyOtp", {
         country_code: "Np",
         mobile_number: "+977" + mobileNumber,
         otp: OTP,
@@ -51,7 +53,7 @@ const Login: React.FC = () => {
         localStorage.setItem("accessToken", accessToken);
       }
 
-      const configResponse = await axiosInstance.get("/users/getConfig");
+      const configResponse = await axios.get("/users/getConfig");
       const userType = configResponse?.data?.jwtdata?.user_type;
 
       if (userType) {
