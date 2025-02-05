@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-const Header: React.FC<{ openLoginForm: () => void }> = ({ openLoginForm }) => {
+const Header: React.FC = () => {
   const msmeCategoryList = [
     { label: "Design MESE's", link: "/design-msme" },
     { label: "Builder MSME's", link: "/builder-msme" },
@@ -96,10 +96,7 @@ const Header: React.FC<{ openLoginForm: () => void }> = ({ openLoginForm }) => {
             For Professionals
           </Link>
         </div>
-        <button
-          onClick={openLoginForm}
-          className="bg-white text-green-700 border border-green-600 px-5 py-2 rounded-md hover:bg-green-600 hover:text-white transition duration-300 transform hover:scale-105 active:scale-95"
-        >
+        <button className="bg-white text-green-700 border border-green-600 px-5 py-2 rounded-md hover:bg-green-600 hover:text-white transition duration-300 transform hover:scale-105 active:scale-95">
           Login
         </button>
       </div>

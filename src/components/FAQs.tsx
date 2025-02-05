@@ -1,5 +1,5 @@
 import { Collapse, CollapseProps } from "antd";
-import FAQImg from "../../../public/images/FAQs.png";
+import FAQImg from "../../public/assets/images/FAQs.png";
 import Image from "next/image";
 
 const FAQs: React.FC = () => {
