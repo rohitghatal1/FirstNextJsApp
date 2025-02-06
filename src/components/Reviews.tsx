@@ -9,6 +9,7 @@ const Reviews: React.FC = () => {
       reveiw_desc:
         "Your sincerity is appreciated. Your job well done. I am satisfied",
     },
+
     {
       user_name: "Hari Kumar",
       user_type: "Builder",
@@ -16,12 +17,14 @@ const Reviews: React.FC = () => {
       reveiw_desc:
         "So Good.He had an amazing talent in creating and developing concepts . The Interior space that she had designed is very sleek and subtle. very satisfied 😌.",
     },
+
     {
       user_name: "Sita Singh",
       user_type: "Home Owner",
       reveiw_date: "2025-1-11",
       reveiw_desc: "Highly skilled and i will absolutely recommend him!",
     },
+
     {
       user_name: "Sarita",
       user_type: "Home Owner",

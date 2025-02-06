@@ -8,6 +8,7 @@ import { Button, Drawer, Form, Input } from "antd";
 import Link from "next/link";
 import axios from "axios";
 import Posts from "@/components/Posts";
+import Reviews from "@/components/Reviews";
 
 const ProfilePage: React.FC = () => {
   const [userData, setUserData] = useState<any>();
@@ -166,6 +167,8 @@ const ProfilePage: React.FC = () => {
             </div>
           )}
           {activeTab === "posts" && <Posts />}
+
+          {activeTab === "reviews" && <Reviews />}
         </div>
       </div>
     </div>
