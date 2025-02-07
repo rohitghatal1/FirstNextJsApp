@@ -11,10 +11,7 @@ import { Span } from "next/dist/trace";
 import { RiSendPlaneFill } from "react-icons/ri";
 const { Option } = Select;
 
-interface postProps {
-  loggedInUserId: string;
-}
-const Posts: React.FC<postProps> = ({ loggedInUserId }) => {
+const Posts: React.FC = () => {
   const [postUploadForm] = Form.useForm();
   const [loggedInUser, setLoggedInUser] = useState<any>();
   const [userPosts, setUserPosts] = useState<any>([]);
@@ -32,9 +29,10 @@ const Posts: React.FC<postProps> = ({ loggedInUserId }) => {
       const response = await axios.get("/posts");
       const allPosts = response?.data?.data;
 
-      const filteredLoggedInUserPost = allPosts.filter(
-        (post: any) => loggedInUserId === post?.professional_id?._id
-      );
+      const filteredLoggedInUserPost = allPosts
+        .filter
+        // (post: any) => loggedInUserId === post?.professional_id?._id
+        ();
       setUserPosts(filteredLoggedInUserPost);
       setLoggedInUser(filteredLoggedInUserPost[0]?.professional_id?.name);
       console.log("logged in user posts", filteredLoggedInUserPost);
@@ -49,7 +47,7 @@ const Posts: React.FC<postProps> = ({ loggedInUserId }) => {
 
   const handleLikePost = async (postId: string) => {
     try {
-      await axiosInstance.patch("/posts/like", {
+      await axios.patch("/posts/like", {
         post_id: postId,
       });
 
@@ -75,7 +73,7 @@ const Posts: React.FC<postProps> = ({ loggedInUserId }) => {
 
   const handlePostUpload = async (type: any, value: any) => {
     try {
-      const response: any = await axiosInstance.get(
+      const response: any = await axios.get(
         `/misc/getPresignedUrl?fileType=${type}`
       );
 
@@ -101,7 +99,7 @@ const Posts: React.FC<postProps> = ({ loggedInUserId }) => {
     };
 
     try {
-      await axiosInstance.post("/posts", updatedValues);
+      await axios.post("/posts", updatedValues);
       message.success("Post added successfylly!!!");
       setIsCreateNewPostModalOpen(false);
     } catch (err: any) {
