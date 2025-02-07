@@ -7,8 +7,8 @@ import { FaCommentAlt } from "react-icons/fa";
 import { Button, Form, Input, message, Modal, Select, Upload } from "antd";
 import { CiCirclePlus } from "react-icons/ci";
 import axios from "axios";
-import { Span } from "next/dist/trace";
 import { RiSendPlaneFill } from "react-icons/ri";
+import { showErrorMessage } from "@/utils/NotificationShow";
 const { Option } = Select;
 
 const Posts: React.FC = () => {
@@ -19,7 +19,6 @@ const Posts: React.FC = () => {
     useState<boolean>(false);
   const [fileList, setFileList] = useState<any>([]);
   const [postUrls, setPostUrls] = useState<any>([]);
-  const [isLiked, setIsLiked] = useState<boolean>(false);
   const [likedPosts, setLikedPosts] = useState<{ [key: string]: boolean }>({});
   const [isCommentSectionOpen, setIsCommentSectionOpen] =
     useState<boolean>(false);
@@ -85,7 +84,7 @@ const Posts: React.FC = () => {
 
       setPostUrls([...postUrls, response?.data?.file_url]);
     } catch (e: any) {
-      // showErrorMessage(e?.response?.data?.message);
+      showErrorMessage(e?.response?.data?.message);
       console.log(e);
     }
   };
