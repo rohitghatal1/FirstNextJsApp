@@ -56,6 +56,7 @@ const Testimonial: React.FC = () => {
     const interval = setInterval(nextSlide, 5000);
     return () => clearInterval(interval);
   }, [isPaused]);
+
   return (
     <div className="mt-2 w-[90%] mx-auto">
       <h2 className="font-semibold text-green-600 py-2 text-center text-2xl">
@@ -69,6 +70,7 @@ const Testimonial: React.FC = () => {
         >
           &#10094;
         </button>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
           {testimonials.slice(index, index + 3).map((testimonial, i) => (
             <div
@@ -92,6 +94,7 @@ const Testimonial: React.FC = () => {
             </div>
           ))}
         </div>
+
         <button
           onClick={nextSlide}
           className="absolute right-0 p-1 bg-gray-200 w-12 h-12 rounded-full hover:bg-gray-300 transition"

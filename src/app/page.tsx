@@ -1,5 +1,3 @@
-// import Image from "next/image"; // Optional for optimized images
-
 import Slider from "@/components/Slider";
 import Testimonial from "@/components/Testimonials";
 import { FaLeaf } from "react-icons/fa";
