@@ -292,7 +292,7 @@ const Posts: React.FC = () => {
           >
             {fileList.length >= 5 ? null : (
               <div className="flex flex-col items-center gap-1">
-                <CiCirclePlus />
+                <CiCirclePlus size={14} />
                 <div style={{ marginTop: 8 }}>Add Photos/Videos</div>
               </div>
             )}
