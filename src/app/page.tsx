@@ -1,6 +1,7 @@
 // import Image from "next/image"; // Optional for optimized images
 
 import Slider from "@/components/Slider";
+import Testimonial from "@/components/Testimonials";
 import { FaLeaf } from "react-icons/fa";
 import { SiCodefresh } from "react-icons/si";
 import { TbBulb } from "react-icons/tb";
@@ -9,6 +10,7 @@ const Home: React.FC = () => {
   return (
     <div className="relative">
       <Slider />
+
       <div className="bg-blue-100 px-4 py-6 min-h-40">
         <div className="w-full sm:w-[90%] h-full mx-0 sm:mx-auto flex flex-col sm:flex-row items-center justify-between gap-8">
           <div className="flex items-center gap-3">
@@ -54,6 +56,8 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <Testimonial />
     </div>
   );
 };
