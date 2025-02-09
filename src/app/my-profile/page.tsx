@@ -2,18 +2,14 @@
 import Image from "next/image";
 import ProfilePic from "../../../public/images/Eco-Friendly_Home.jpg";
 import CoverPhoto from "../../../public/images/homeImage1.jpg";
-import axiosInstance from "../utils/axiosInstance";
 import { useEffect, useState } from "react";
 import { FaCloudUploadAlt, FaEdit, FaUserEdit } from "react-icons/fa";
-import Posts from "../components/subPages/Posts";
-import MyProfessionals from "../components/subPages/MyProfessionals";
 import Link from "next/link";
 import { Form, Input, message, Modal, Spin, Upload } from "antd";
 import ImgCrop from "antd-img-crop";
-import { showErrorMessage } from "../utils/notificationShow";
 import axios from "axios";
-import EditProfile from "../edit-profile/page";
-import Reviews from "../components/subPages/Reviews";
+import Posts from "@/components/Posts";
+import Reviews from "@/components/Reviews";
 
 const ProfilePage: React.FC = () => {
   const [addPhotoForm] = Form.useForm();
@@ -24,14 +20,12 @@ const ProfilePage: React.FC = () => {
   const [isUploadingImage, setIsUploadingImage] = useState<boolean>(false);
 
   const getConfigData = async () => {
-    const response = await axiosInstance.get("/users/getConfig");
+    const response = await axios.get("/users/getConfig");
     if (response?.data?.userData?.user_type === "user") {
       setUserData(response?.data?.userData);
       console.log(response?.data?.userData);
     } else {
-      const response = await axiosInstance.get(
-        "/professionals/getMyProfessionals"
-      );
+      const response = await axios.get("/professionals/getMyProfessionals");
       setUserData(response?.data?.data[0]);
       console.log(response?.data?.data[0]);
     }
@@ -44,7 +38,7 @@ const ProfilePage: React.FC = () => {
   const uploadPhoto = async (type: any, value: any) => {
     setIsUploadingImage(true);
     try {
-      const response = await axiosInstance.get(
+      const response = await axios.get(
         `/misc/getPresignedUrl?fileType=${type}`
       );
 
@@ -68,9 +62,9 @@ const ProfilePage: React.FC = () => {
   const handlePhotoSubmit = async (values: any) => {
     try {
       if (userData?.user_type && userData?.user_type === "user") {
-        await axiosInstance.patch("/users/profile", values);
+        await axios.patch("/users/profile", values);
       } else {
-        await axiosInstance.patch("/professionals/editMyProfessionals", values);
+        await axios.patch("/professionals/editMyProfessionals", values);
       }
 
       message.success("image uploaded successfully");
@@ -206,11 +200,7 @@ const ProfilePage: React.FC = () => {
             </div>
           )}
 
-          {activeTab === "myProfessionals" && (
-            <MyProfessionals userId={userData?._id} />
-          )}
-
-          {activeTab === "posts" && <Posts loggedInUserId={userData?._id} />}
+          {activeTab === "posts" && <Posts />}
           {activeTab === "reviews" && <Reviews />}
         </div>
       </div>
