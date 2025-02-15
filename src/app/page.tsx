@@ -1,9 +1,10 @@
+import AboutUs from "@/components/AboutUs";
+import FAQs from "@/components/FAQs";
 import Slider from "@/components/Slider";
 import Testimonial from "@/components/Testimonials";
 import { FaLeaf } from "react-icons/fa";
 import { SiCodefresh } from "react-icons/si";
 import { TbBulb } from "react-icons/tb";
-import AboutUs from "./about/page";
 
 const Home: React.FC = () => {
   return (
@@ -59,6 +60,8 @@ const Home: React.FC = () => {
       <Testimonial />
 
       <AboutUs />
+
+      <FAQs />
     </div>
   );
 };
