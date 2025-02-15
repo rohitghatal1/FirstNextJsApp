@@ -86,7 +86,9 @@ const Testimonial: React.FC = () => {
                   className="w-36 h-36 rounded-full border-4 border-white"
                 />
               </div>
+
               <p className="mt-4 text-gray-600">{testimonial.message}</p>
+
               <h4 className="mt-4 font-semibold text-orange-500">
                 {testimonial.name}
               </h4>

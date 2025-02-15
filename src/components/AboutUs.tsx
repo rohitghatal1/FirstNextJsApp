@@ -11,7 +11,7 @@ const AboutUs: React.FC = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setPrevPhotoIndex(currentPhotoIndex); // Save the previous image
+      setPrevPhotoIndex(currentPhotoIndex);
       setCurrentPhotoIndex((prev) => (prev + 1) % homePhotos.length);
     }, 3000);
 
@@ -26,7 +26,6 @@ const AboutUs: React.FC = () => {
 
       <div className="flex flex-col sm:flex-row p-4 gap-6 items-start">
         <div className="relative w-full sm:w-1/2 h-60 sm:h-[28rem] overflow-hidden rounded-xl">
-          {/* Previous Image (Fade Out) */}
           {prevPhotoIndex !== null && (
             <Image
               key={`prev - ${prevPhotoIndex}`}
@@ -36,7 +35,6 @@ const AboutUs: React.FC = () => {
             />
           )}
 
-          {/* Current Image (Fade In) */}
           <Image
             key={`current - ${currentPhotoIndex}`}
             src={homePhotos[currentPhotoIndex]}
@@ -50,6 +48,7 @@ const AboutUs: React.FC = () => {
           <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">
             What we do
           </h2>
+
           <p className="mt-2 text-gray-600 leading-relaxed">
             We connect{" "}
             <span className="font-semibold text-green-500">Homeowners</span> to
